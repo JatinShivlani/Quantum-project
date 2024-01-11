@@ -8,7 +8,6 @@ import { TbMinusVertical } from "react-icons/tb";
 import { MdDateRange } from "react-icons/md";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
 const Register = () => {
     const [render, setRender] = useState(false)
     const navigate = useNavigate()
@@ -30,15 +29,13 @@ const Register = () => {
         axios.post('http://localhost:5000/api/auth/createuser', data).then((value) => {
             if (value.data.success) {
                 localStorage.setItem('token', value.data.authToken)
-                toast.success('You are registered')
                 navigate('/dashboard')
             }
         }).catch((error)=>{
-            toast.error(error)
+           console.log(error)
         })
     }
     return (<>
-    <div><Toaster/></div>
     {render ? <><div className='w-full h-[100vh] bg-custom flex justify-center items-center gap-1 flex-col'>
         <div className='sm:w-[400px] sm:h-[550px] w-[300px] h-[500px] bg-[#1d2c4f] rounded-lg shadow-md relative -z-2 flex flex-col justify-start items-center px-4 gap-4'>
             <div className="signin bg-[#00f5e1] text-xl w-[150px] h-[50px] absolute z-10 -top-4 flex justify-center items-center rounded-sm font-medium text-gray-600">Sign-Up</div>

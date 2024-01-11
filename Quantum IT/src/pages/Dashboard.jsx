@@ -5,7 +5,6 @@ import { FaCircle } from "react-icons/fa";
 import { IoIosSettings, IoIosCloseCircle } from "react-icons/io";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from 'react-hot-toast'
 const TableRow = ({ status, img, number, date, role, name }) => {
   return (
     <tr className="border-b dark:border-neutral-500">
@@ -48,20 +47,20 @@ const Dashboard = () => {
           setRender(true)
         }
       }).catch((error)=>{
-        toast.error(error)
         localStorage.removeItem('token')
         navigate('/')
       })
     }
+ else{
+  navigate('/')
+ }
   }, [])
   const logout=()=>{
-    toast.success('Logged out')
     localStorage.removeItem('token');
     navigate('/')
   }
   return (
     <>
-    <div><Toaster/></div>
     {render?<><div className="flex flex-col overflow-x-auto">
     <div onClick={logout}  className="bg-gray-700 text-xl w-[150px] cursor-pointer text-white m-4 px-2 py-1 text-center rounded-lg shadow-sm font-medium ml-auto shadow-black">Log-out</div>
         <div className="">

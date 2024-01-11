@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaUser, FaLock } from "react-icons/fa";
 import { TbMinusVertical } from "react-icons/tb";
 import axios from 'axios'
-import toast, { Toaster } from 'react-hot-toast'
 const Login = () => {
     const [render, setRender] = useState(false)
     const navigate = useNavigate()
@@ -25,16 +24,15 @@ const Login = () => {
         axios.post('http://localhost:5000/api/auth/login', data).then((value) => {
             if (value.data.success) {
                 localStorage.setItem('token', value.data.authToken)
-                toast.success('You are Logged In')
                 navigate('/dashboard')
             }
         }).catch((error)=>{
-            toast.error(error)
+            console.log(error)
         })
     }
 
     return (
-        <><div><Toaster/></div>
+        <>
             {render ? <>
             <div className='w-full h-[100vh] bg-custom flex justify-center items-center gap-1 flex-col'>
                 <div className='sm:w-[400px] sm:h-[450px] w-[300px] h-[400px] bg-[#1d2c4f] rounded-lg shadow-md relative -z-2 flex flex-col justify-start items-center px-4 gap-4'>
